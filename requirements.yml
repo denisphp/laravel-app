@@ -1,0 +1,36 @@
+#ansible-galaxy install -r requirements.yml -p ansible/roles/
+- src: git@gitlab.mobidev.biz:ansible/initial.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.mobidev.biz:ansible/composer.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.mobidev.biz:ansible/nginx.git
+  scm: git
+  version: v2.2
+
+- src: git@gitlab.mobidev.biz:ansible/pgsql.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.mobidev.biz:ansible/php-ubuntu.git
+  scm: git
+  version: v3.0
+
+- src: git@gitlab.mobidev.biz:ansible/phppgadmin.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.mobidev.biz:ansible/xdebug.git
+  scm: git
+  version: v2.1
+
+- src: git@gitlab.mobidev.biz:ansible/redis.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.mobidev.biz:ansible/phpredis.git
+  scm: git
+  version: v2.1

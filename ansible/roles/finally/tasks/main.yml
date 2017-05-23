@@ -1,0 +1,16 @@
+- stat: path="{{ folder }}"/vendor
+  register: vendor_folder
+
+- name: composer install
+  composer: working_dir="{{ folder }}"
+  when: not vendor_folder.stat.exists
+
+- name: set environments
+  command: creates="{{ folder }}/.env" mv {{ folder }}/.env.{{ env }} {{ folder }}/.env
+
+- name: generate app key
+  shell: cd {{ folder }} && php artisan key:generate
+
+- name: run migrations
+  shell: cd {{ folder }} && php artisan migrate
+
