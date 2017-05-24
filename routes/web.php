@@ -24,4 +24,8 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['admin']], function () {
     Route::get('admin', 'Admin\AdminController@index');
     Route::get('admin/logout', 'Admin\Auth\LoginController@logout');
+    Route::get('admin/users', 'Admin\UserController@index');
+    Route::get('admin/users/{id}', 'Admin\UserController@view')->where('id', '[0-9]+');
+    Route::get('admin/users/{id}/edit', 'Admin\UserController@edit')->where('id', '[0-9]+');
+    Route::post('admin/users/{id}/update', 'Admin\UserController@update')->where('id', '[0-9]+')->name('admin.users.update');
 });

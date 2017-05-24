@@ -57,6 +57,7 @@
                             <li><a href="{{ url('admin/login') }}">Admin Login</a></li>
                             <li><a href="{{ url('admin/register') }}">Admin Register</a></li>
                         @else
+                            <li><a href="{{ url('admin/users') }}">Users</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
@@ -81,8 +82,12 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="container">
+            @if (\Session::has('message'))
+                <div class="alert alert-info">{{ \Session::get('message') }}</div>
+            @endif
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
