@@ -8,14 +8,13 @@ class AdminController extends Controller
 {
     public function index()
     {
-//        return view('home');
-        return 'admin home page';
+        return view('home');
     }
 
     public function dashboard()
     {
-
-//        return view('backend.dashboard');
-        return 'admin dashboard page';
+//        $user = auth()->guard('admin')->user();
+//        print_r($user); die();
+        return view('admin.dashboard');
     }
 }

@@ -17,8 +17,8 @@ Route::group(['middleware' => ['guest']], function () {
     });
 
     // ADMIN
-    Route::get('admin/login', 'Admin\Auth\LoginController@getLoginForm');
-    Route::post('admin/authenticate', 'Admin\Auth\LoginController@authenticate');
+    Route::get('admin/login', 'Admin\Auth\LoginController@getLogin');
+    Route::post('admin/authenticate', 'Admin\Auth\LoginController@postLogin');
 });
 
 Route::group(['middleware' => ['admin']], function () {
