@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    // ADMIN
+    Route::get('admin/login', 'Admin\Auth\LoginController@getLoginForm');
+    Route::post('admin/authenticate', 'Admin\Auth\LoginController@authenticate');
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('admin/dashboard', 'Admin\AdminController@dashboard');
+    Route::get('admin/logout', 'Admin\Auth\LoginController@logout');
 });
