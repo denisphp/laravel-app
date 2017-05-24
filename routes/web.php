@@ -22,6 +22,6 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['admin']], function () {
-    Route::get('admin/dashboard', 'Admin\AdminController@dashboard');
+    Route::get('admin', 'Admin\AdminController@index');
     Route::get('admin/logout', 'Admin\Auth\LoginController@logout');
 });

@@ -34,7 +34,7 @@ class LoginController extends Controller
         $password = $request->input('password');
 
         if (auth()->guard('admin')->attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->intended('admin/dashboard');
+            return redirect()->intended('admin');
         }
 
         return redirect()->intended('admin/login')->with('status', 'Invalid Login Credentials !');
