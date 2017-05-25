@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 use Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use JWTAuth;
 
 class APIController extends Controller
@@ -13,24 +15,28 @@ class APIController extends Controller
     {
         $input = $request->json()->all();
         $input['password'] = Hash::make($input['password']);
-        User::create($input);
-        return response()->json(['result' => true]);
+
+        $user = User::create($input);
+        $token = Auth::guard('api')->setApiToken($user);
+
+        return response()->json(['data' => ['token' => $token]]);
     }
 
     public function login(Request $request)
     {
         $input = $request->json()->all();
-        if (!$token = JWTAuth::attempt($input)) {
-            return response()->json(['result' => 'wrong email or password.']);
+
+        if (!$token = Auth::guard('api')->attempt($input)){
+            return response()->json(['data' => 'wrong email or password.']);
         }
 
-        return response()->json(['result' => $token]);
+        return response()->json(['data' => ['token' => $token]]);
     }
 
     public function get_user_details(Request $request)
     {
-        $input = $request->json()->all();
-        $user = JWTAuth::toUser($input['token']);
-        return response()->json(['result' => $user]);
+        $user = Auth::guard('api')->user();
+
+        return response()->json(['data' => ['user' => $user]]);
     }
 }

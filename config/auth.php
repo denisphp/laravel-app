@@ -41,14 +41,14 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-        ],
-
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin'
+        ],
+
+        'api' => [
+            'driver' => 'tokenExtended',
+            'provider' => 'custom'
         ],
     ],
 
@@ -77,6 +77,10 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+        'custom' => [
+            'driver' => 'custom',
+            'model' => App\User::class
         ]
     ],
 

@@ -183,6 +183,7 @@ return [
          */
         Nayjest\Grids\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\CustomAuthProvider::class
     ],
 
     /*
