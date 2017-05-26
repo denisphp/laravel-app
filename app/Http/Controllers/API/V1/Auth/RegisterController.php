@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+use App\Facades\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +24,9 @@ class RegisterController extends Controller
 
         $user = User::create($input);
         $token = Auth::guard('api')->setApiToken($user);
+        $response['user'] = $user->toArray();
+        $response['token'] = $token;
 
-        return response()->json(['data' => ['token' => $token]]);
+        return ApiResponse::success($response);
     }
 }

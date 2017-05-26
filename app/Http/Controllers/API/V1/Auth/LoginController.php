@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+use App\Facades\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,6 @@ class LoginController extends Controller
             return response()->json(['data' => 'wrong email or password.']);
         }
 
-        return response()->json(['data' => ['token' => $token]]);
+        return ApiResponse::success(['token' => $token]);
     }
 }

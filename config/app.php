@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\ApiResponseProvider::class,
 
         /*
          * Grids Service Providers
@@ -234,6 +235,7 @@ return [
         'HTML' => Collective\Html\HtmlFacade::class,
         'Grids' => Nayjest\Grids\Grids::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'ApiResponse' => \App\Facades\ApiResponse::class,
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\User;
 
+use App\Facades\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,6 @@ class UserController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        return response()->json(['data' => ['user' => $user]]);
+        return ApiResponse::success(['user' => $user->toArray()]);
     }
 }
