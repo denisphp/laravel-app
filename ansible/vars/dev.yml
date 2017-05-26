@@ -1,6 +1,6 @@
 ############# initial ##########
 hostname: laravel-app.local
-folder: /var/www/laravel-app
+folder: /var/www/laravel-crud-app
 env: local
 packages: [
   git-core,

@@ -11,7 +11,7 @@ vm:
   name: "laravel-app"
 sync:
   synced_folder: "." # or "/var/www/<project-name>"
-  vagrant_folder: "/var/www/laravel-app/" # or "/var/www/<project-name>"
+  vagrant_folder: "/var/www/laravel-crud-app/" # or "/var/www/<project-name>"
   second_synced_folder: ""
   second_vagrant_folder: ""
 network:
