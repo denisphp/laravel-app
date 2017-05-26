@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Services;
 
 use App\User;
 use Illuminate\Auth\GenericUser;

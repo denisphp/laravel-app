@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\JWTAuthProvider;
 use App\Services\JWTGuard;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
