@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -20,8 +21,13 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $input = $request->json()->all();
-        $input['password'] = Hash::make($input['password']);
 
+        $validator = Validator::make($input, User::$createUserRules);
+        if ($validator->fails()) {
+            return ApiResponse::fail(400, ['user' => $validator->messages()]);
+        }
+
+        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $token = Auth::guard('api')->setApiToken($user);
         $response['user'] = $user->toArray();
