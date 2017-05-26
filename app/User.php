@@ -32,4 +32,9 @@ class User extends Authenticatable
         'email' => 'required|email|unique:users',
         'password' => 'required|alpha_num'
     ];
+
+    public static $updateUserRules = [
+        'name' => 'required|alpha_num|max:255',
+        'email' => 'required|email|unique:users,email,{{$id}},user_id',
+    ];
 }

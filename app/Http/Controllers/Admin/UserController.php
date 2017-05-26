@@ -4,35 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use Grids;
 use HTML;
-use Illuminate\Support\Facades\Config;
-use Nayjest\Grids\Components\Base\RenderableRegistry;
-use Nayjest\Grids\Components\ColumnHeadersRow;
-use Nayjest\Grids\Components\ColumnsHider;
-use Nayjest\Grids\Components\CsvExport;
-use Nayjest\Grids\Components\ExcelExport;
-use Nayjest\Grids\Components\Filters\DateRangePicker;
-use Nayjest\Grids\Components\FiltersRow;
-use Nayjest\Grids\Components\HtmlTag;
-use Nayjest\Grids\Components\Laravel5\Pager;
-use Nayjest\Grids\Components\OneCellRow;
-use Nayjest\Grids\Components\RecordsPerPage;
-use Nayjest\Grids\Components\RenderFunc;
-use Nayjest\Grids\Components\ShowingRecords;
-use Nayjest\Grids\Components\TFoot;
-use Nayjest\Grids\Components\THead;
-use Nayjest\Grids\Components\TotalsRow;
+use Illuminate\Http\Request;
 use Nayjest\Grids\DataRow;
-use Nayjest\Grids\DbalDataProvider;
 use Nayjest\Grids\EloquentDataProvider;
 use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\FilterConfig;
 use Nayjest\Grids\Grid;
 use Nayjest\Grids\GridConfig;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -94,42 +73,35 @@ class UserController extends Controller
 
     public function view($id)
     {
-        $user = User::find($id);
+        $user = $this->findModel($id);
 
         return view('admin.user.view', ['user' => $user]);
     }
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = $this->findModel($id);
 
         return view('admin.user.edit', ['user' => $user]);
     }
 
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $rules = [
+        $user = $this->findModel($id);
+        $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-        ];
+        ]);
+        $input = $request->all();
+        $user->fill($input)->save();
 
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-
-            return Redirect::to('admin/users/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
-        }
-        // store
-        $nerd = User::find($id);
-        $nerd->name = Input::get('name');
-        $nerd->email = Input::get('email');
-        $nerd->save();
-
-        // redirect
         \Session::flash('message', 'Successfully updated user!');
 
-        return Redirect::to('admin/users');
+        return redirect()->back();
+    }
+
+    protected function findModel($id)
+    {
+        return User::findOrFail($id);
     }
 }
