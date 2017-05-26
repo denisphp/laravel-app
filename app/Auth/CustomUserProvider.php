@@ -3,6 +3,7 @@ namespace App\Auth;
 
 use App\User;
 use Illuminate\Auth\GenericUser;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -41,7 +42,7 @@ class CustomUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        $id  = Redis::get('session::' . $credentials['api_token']);
+        $id  = Redis::get(Config::get('jwt.redis_api_session_key_prefix') . $credentials['api_token']);
 
         if($id){
             $user = User::find($id);

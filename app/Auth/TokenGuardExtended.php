@@ -2,6 +2,7 @@
 namespace App\Auth;
 
 use Illuminate\Auth\TokenGuard;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Auth\Events\Authenticated;
 use Hash;
@@ -32,7 +33,8 @@ class TokenGuardExtended extends TokenGuard
     {
         $token = $this->generateRandomKey();
 
-        Redis::set('session::' . $token, $user->id);
+        Redis::set(Config::get('jwt.redis_api_session_key_prefix') . $token, $user->id);
+        Redis::expire(Config::get('jwt.redis_api_session_key_prefix') . $token, Config::get('jwt.api_ttl'));
 
         return $token;
     }
