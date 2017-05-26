@@ -162,7 +162,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        \Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -182,8 +181,7 @@ return [
          * Grids Service Providers
          */
         Nayjest\Grids\ServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        App\Providers\CustomAuthProvider::class
+        Collective\Html\HtmlServiceProvider::class
     ],
 
     /*
@@ -232,7 +230,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'JWTAuth' => \Tymon\JWTAuth\Facades\JWTAuth::class,
         'Form' => Illuminate\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Grids' => Nayjest\Grids\Grids::class,

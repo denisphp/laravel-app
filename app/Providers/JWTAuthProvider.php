@@ -1,5 +1,6 @@
 <?php
-namespace App\Auth;
+
+namespace App\Providers;
 
 use App\User;
 use Illuminate\Auth\GenericUser;
@@ -11,7 +12,7 @@ use Illuminate\Contracts\Auth\UserProvider;
 use Hash;
 use Illuminate\Support\Str;
 
-class CustomUserProvider implements UserProvider
+class JWTAuthProvider implements UserProvider
 {
     /**
      * Retrieve a user by their unique identifier.

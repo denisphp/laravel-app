@@ -47,8 +47,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'tokenExtended',
-            'provider' => 'custom'
+            'driver' => 'jwt',
+            'provider' => 'jwt-auth'
         ],
     ],
 

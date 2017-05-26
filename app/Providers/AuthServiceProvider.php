@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->app['auth']->provider('jwt-auth', function (){
+            return new JWTAuthProvider();
+        });
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Auth;
+namespace App\Services;
 
 use Illuminate\Auth\TokenGuard;
 use Illuminate\Support\Facades\Config;
@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Auth\Events\Authenticated;
 use Hash;
 
-class TokenGuardExtended extends TokenGuard
+class JWTGuard extends TokenGuard
 {
     /**
      * Attempt to authenticate the user and return the token.

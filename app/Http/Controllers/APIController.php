@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
-use JWTAuth;
+
 
 class APIController extends Controller
 {

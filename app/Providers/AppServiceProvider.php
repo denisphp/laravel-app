@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Auth\CustomUserProvider;
-use App\Auth\TokenGuardExtended;
+use App\Services\JWTGuard;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Auth::extend('tokenExtended', function () {
-            $provider = new CustomUserProvider();
-            return new TokenGuardExtended($provider, request());
+        Auth::extend('jwt', function () {
+            $provider = new JWTAuthProvider();
+            return new JWTGuard($provider, request());
         });
     }
 
